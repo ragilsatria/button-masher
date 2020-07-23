@@ -11,8 +11,8 @@
 </template>
 
 <script>
-import io from "socket.io-client";
-let socket = io.connect("localhost:3000");
+import io from 'socket.io-client';
+const baseUrl = 'http://localhost:3000';
 
 export default {
   name: "Login",
@@ -27,8 +27,13 @@ export default {
       socket.emit("chat message", this.nickname);
       this.$store.commit("createUser", this.nickname);
     }
+  },
+  created() {
+      const socket = io(baseUrl);
+      this.$store.commit('SET_SOCKET', socket); 
   }
-};
+}
+
 </script>
 
 <style scoped>
