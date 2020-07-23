@@ -11,6 +11,8 @@
 </template>
 
 <script>
+import io from 'socket.io-client';
+const baseUrl = 'http://localhost:3000';
 export default {
   name: 'Login',
   data() {
@@ -24,6 +26,10 @@ export default {
       this.$store.commit('createUser' ,this.nickname);
     }
   },
+  created() {
+      const socket = io(baseUrl);
+      this.$store.commit('SET_SOCKET', socket); 
+  }
 }
 </script>
 
