@@ -1,7 +1,9 @@
 <template>
-  <div>
+  <div class="container mt-5">
     <h1>{{ $store.state.count }}</h1>
-    <button type="button" name="button" @click="addCount" >Smash It!</button>
+    <div class="container mt-5">
+      <button type="button" name="button" @click="addCount" >Smash It!</button>
+    </div>
   </div>
 </template>
 
