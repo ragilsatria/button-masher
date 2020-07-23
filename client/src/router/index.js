@@ -2,6 +2,8 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 import Home from '../views/Home.vue';
 import Login from '../views/Login.vue';
+import PlayRoom from '../views/PlayRoom.vue';
+
 
 Vue.use(VueRouter)
 
@@ -24,6 +26,11 @@ const routes = [
     path: '/login',
     name: 'Login',
     component: Login,
+  },
+  {
+    path: '/playroom',
+    name: 'PlayRoom',
+    component: PlayRoom,
   },
 ]
 
