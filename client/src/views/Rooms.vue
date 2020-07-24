@@ -21,7 +21,7 @@
     </div>
 
     <div class="mother">
-        <div class="card" v-for="room in rooms" :key="room.id" @click="goToRooms(room.id)">
+        <div class="card" v-for="room in rooms" :key="room.id" @click="goToRooms(room)">
           <div class="card-body">
             <h3 class="card-title">{{room.name}}</h3>
             <br />
@@ -117,8 +117,16 @@ export default {
           this.roomname = ""
           this.genre = ""
       },
-      goToRooms(id){
-        this.$router.push(`/waiting/${id}`)
+      goToRooms(room){
+        console.log(room)
+        if (room.list_player.length !== 2){
+          this.$router.push(`/waiting/${room.id}`)
+        } else {
+          console.log(`room penuh`)
+        }
+        // socket.emit('join-room', {roomId: id, playerName: localStorage.nickname})
+        
+
       }
   }
 };
