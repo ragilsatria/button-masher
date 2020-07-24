@@ -47,6 +47,10 @@ io.on('connection', (socket) => {
             io.emit("get-rooms", rooms)
         })
     })
+    socket.on("goToPlay", data => {
+        console.log(data)
+        socket.broadcast.to(`room${data}`).emit("go-to-play")
+    })
 })
 
 http.listen(PORT, () => {
