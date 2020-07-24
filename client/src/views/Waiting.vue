@@ -98,20 +98,20 @@ export default {
   },
   methods: {
     goToPlay() {
-      this.sockets.emit("goToPlay", this.$route.params.id)
+      socket.emit("goToPlay", this.$route.params.id)
       this.$router.push(`/playroom/${this.$route.params.id}`)
     }
   },
   created() {
     this.nickname = localStorage.nickname
-    this.sockets.on("go-to-play",() => {
+    socket.on("go-to-play",() => {
       this.$router.push(`/playroom/${this.$route.params.id}`)
     })
     const data = {
       roomId: this.$route.params.id,
       playerName: localStorage.nickname
     }
-    this.sockets.emit("join-room", data)
+    socket.emit("join-room", data)
     console.log(this.curentRoom)
   },
   computed: {

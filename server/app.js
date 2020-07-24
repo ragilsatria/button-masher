@@ -51,6 +51,14 @@ io.on('connection', (socket) => {
         console.log(data)
         socket.broadcast.to(`room${data}`).emit("go-to-play")
     })
+    socket.on('add-count', data => {
+        console.log(data)
+        socket.broadcast.to(data.room).emit("broadcast-count", data)
+
+    })
+    socket.on('timeOut', () => {
+        console.log(`etst123`)
+    })
 })
 
 http.listen(PORT, () => {
