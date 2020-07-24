@@ -97,7 +97,6 @@ export default {
     };
   },
   methods: {
-    playSong() {},
     goToPlay() {
       this.sockets.emit("goToPlay", this.$route.params.id)
       this.$router.push(`/play/${this.$route.params.id}`)

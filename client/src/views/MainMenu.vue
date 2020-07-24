@@ -20,7 +20,7 @@ export default {
   created() {
     const socket = io(baseUrl);
     this.$store.commit('SET_SOCKET', socket);
-    console.log(this.sockets)
+    // console.log(this.sockets)
     this.sockets.on("get-rooms", rooms => {
         console.log(rooms)
         this.$store.commit('SET_ROOMS',rooms)

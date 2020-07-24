@@ -71,9 +71,7 @@ const socket = io(baseUrl);
 export default {
   data() {
     return {
-      genre:"",
       roomname: "",
-
     }
   },
   computed: {
@@ -82,6 +80,12 @@ export default {
         },
         rooms(){
             return this.$store.state.rooms
+        },
+        availableRooms(){
+          let available = this.rooms.filter(room => {
+            return room.isPlay == false
+          })
+          return available
         }
     },
   created() {

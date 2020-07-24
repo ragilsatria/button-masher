@@ -12,7 +12,7 @@ export default {
   name: 'App',
   created(){
     const socket = io(baseUrl)
-    this.$store.comit(`SET_SOCKET`, socket)
+    this.$store.commit(`SET_SOCKET`, socket)
   }
   
 }

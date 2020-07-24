@@ -5,6 +5,7 @@ import Login from '../views/Login.vue';
 import Rooms from '../views/Rooms.vue';
 import MainMenu from '../views/MainMenu.vue';
 import Waiting from '../views/Waiting.vue';
+import Play from '../views/Play.vue'
 
 Vue.use(VueRouter)
 
@@ -19,7 +20,7 @@ const routes = [
     name: 'MainMenu',
     component: MainMenu,
   },
- {
+  {
     path: '/rooms',
     name: 'Rooms',
     component: Rooms,
@@ -28,7 +29,12 @@ const routes = [
     path: '/',
     name: 'Home',
     component: Home,
-    meta: {auth : true},
+    meta: { auth: true },
+  },
+  {
+    path: '/play/:id',
+    Name: 'Play',
+    component: Play
   },
   {
     path: '/about',
@@ -62,7 +68,7 @@ router.beforeEach((to, from, next) => {
   //   next();
   // }
   if (!localStorage.nickname && to.path !== '/login') {
-    next({path: '/login'});
+    next({ path: '/login' });
   } else {
     next();
   }
