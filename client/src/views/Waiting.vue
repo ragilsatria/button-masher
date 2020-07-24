@@ -98,7 +98,7 @@ export default {
   },
   methods: {
     goToPlay() {
-      socket.emit("go-to-play", this.$route.params.id)
+      this.sockets.emit("goToPlay", this.$route.params.id)
       this.$router.push(`/playroom/${this.$route.params.id}`)
     }
   },

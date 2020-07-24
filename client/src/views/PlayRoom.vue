@@ -20,6 +20,7 @@ export default {
     startTimer() {
       setTimeout(() => {
       this.$store.state.timeout = true
+      console.log(this.$store.state.timeout, "ini timeout")
       this.$store.commit('STOP_COUNT')
       }, this.$store.state.timer);
     },
