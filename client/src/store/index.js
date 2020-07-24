@@ -19,7 +19,7 @@ export default new Vuex.Store({
       router.push({ path: '/rooms' });
     },
     ADD_COUNT(state, payload) {
-      state.timer = 10000
+      // state.timer = 10000
       state.count++
     },
     STOP_COUNT(state, payload) {
