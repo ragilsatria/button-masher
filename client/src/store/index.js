@@ -11,9 +11,14 @@ export default new Vuex.Store({
     timer: 5000,
     disabled: false,
     socket: null,
-    rooms: []
+    rooms: [],
+    timeout: false
   },
   mutations: {
+    clearCount(state) {
+      state.count = 0
+      state.timeout = false
+    },
     createUser(state, payload) {
       state.users.push(payload);
       router.push({ path: '/rooms' });

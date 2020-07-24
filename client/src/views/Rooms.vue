@@ -42,23 +42,36 @@
     margin: 0 auto;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
-    background-color: red;
+    /* background-color: red; */
   }
 
   .card {
     width: 200px;
     margin: 15px;
+    box-shadow: 1px 1px 3px black;
   }
 
   #createRoom {
+    color: white;
     margin-bottom: 50px;
     background-color: blue;
+    box-shadow: 0px 2px 10px black;
   }
 
   form {
     padding: 50px;
     width: 60%;
     margin: 0 auto;
+  }
+
+  form > label {
+    font-weight: 600;
+    text-shadow: 1px 1px 1px black;
+    padding-bottom: 20px;
+  }
+
+  input {
+    text-align: center;
   }
 
 </style>

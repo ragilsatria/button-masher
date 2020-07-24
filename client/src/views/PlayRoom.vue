@@ -1,25 +1,33 @@
 <template>
   <div id="play">
-    <h1 v-if='$store.state.timeout && $store.state.count > countOtherPlayer.count'>You Win!!!</h1>
-    <h1 v-else-if='$store.state.timeout && $store.state.count < countOtherPlayer.count'>You Lose!!!</h1>
-    <h1 v-else-if='$store.state.timeout && $store.state.count === countOtherPlayer.count'>Draw</h1>
+    <!-- <h1 class="result" v-if='$store.state.timeout && $store.state.count > countOtherPlayer.count'>You Win!!!</h1>
+    <h1 class="result" v-else-if='$store.state.timeout && $store.state.count < countOtherPlayer.count'>You Lose!!!</h1>
+    <h1 class="result" v-else-if='$store.state.timeout && $store.state.count === countOtherPlayer.count'>Draw</h1> -->
 
     <div class="mother">
       
       <div class="boks">
-        <h2 v-if='$store.state.timeout'>Your Score:</h2>
+        <h1 class="result" v-if='$store.state.timeout && $store.state.count > countOtherPlayer.count'>You Win!!!</h1>
+        <h1 class="result" v-else-if='$store.state.timeout && $store.state.count < countOtherPlayer.count'>You Lose!!!</h1>
+        <h1 class="result" v-else-if='$store.state.timeout && $store.state.count === countOtherPlayer.count'>Draw</h1>
+
+        <h2 class="score-a" v-if='$store.state.timeout'>Your Score:</h2>
         <h1 class="score">{{ $store.state.count }}</h1>
+        <h2>{{countOtherPlayer.player}}: {{countOtherPlayer.count}}</h2>
+
       </div>
 
       <div class="boks">
-        <button class="btn btn-danger" type="button" name="button" @click="addCount" v-if="!$store.state.disabled">Smash It!</button>
+
+        <h2 class="score-a" v-if='$store.state.timeout'>Opponent:</h2>
+        <h1 class="score" v-if='$store.state.timeout'>{{ countOtherPlayer.count }}</h1>
+        <!-- <h2>{{countOtherPlayer.player}}: {{countOtherPlayer.count}}</h2> -->
+        <button v-if="!$store.state.timeout" class=" smash btn btn-danger" type="button" name="button" @click="addCount">Smash It!</button>
       </div>
 
     </div>
 
-    <div class="scoreBoard">
-      <h2>{{countOtherPlayer.player}}: {{countOtherPlayer.count}}</h2>
-    </div>
+    <button class="btn btn-primary" @click.prevent="backToRoom">Back</button>
 
     <!-- <div>
       <button v-if="$store.state.timeout" @click="backToRoom" class="btn btn-primary">Back to select room</button>
@@ -61,11 +69,12 @@ export default {
     
   },
   created() {
+    this.$store.commit('clearCount')
     const data = {
       roomId: this.$route.params.id,
       playerName: localStorage.nickname
     }
-    // socket.emit("join-room", data)
+    socket.emit("join-room", data)
     window.addEventListener('keydown', (e) => {
       if (e.key == 'Space') {
         this.$store.commit('ADD_COUNT');
@@ -93,13 +102,16 @@ export default {
   }
 
   .mother {
-    padding-top: 40px;
+    padding-top: 70px;
     display: grid;
     grid-template-columns: 1fr 1fr;
   }
 
+  .score-a {
+    padding-top: 30px;
+  }
   .score {
-    padding-top: 60px;
+    /* padding-top: 30px; */
     font-size: 300px;
   }
 
@@ -107,11 +119,15 @@ export default {
     margin: 10px
   }
 
-  .btn {
+  .smash {
     margin: 150px auto;
     height: 300px;
     width: 300px;
     font-size: 60px;
+  }
+
+  .result {
+    text-align: center;
   }
 
   .boks {

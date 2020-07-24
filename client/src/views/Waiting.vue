@@ -45,7 +45,8 @@
           </div>
         </div>
       </div>
-      <button class="btn btn-primary btn-lg" style="color:white" v-if="curentRoom.admin == nickname" @click="goToPlay">Mulai</button>
+      <button class="btn btn-primary btn-lg" style="color:white" v-if="curentRoom.admin == nickname" @click="goToPlay">Start</button>
+      <button class="btn btn-primary btn-lg" style="color:white"  @click.prevent="backToRoom">Back</button>
     </div>
 
   </div>
@@ -54,16 +55,17 @@
 <style scoped>
   .instruction {
     padding-top: 20px;
-    margin: 30px auto;
+    text-shadow: 1px 1px 1px black;
     height: 100px;
-    width: 60%;
-    background-color: red;
+    width: 100%;
+    background-color: blue;
+    color: white;
   }
 
   .mother {
-    margin: 0 auto;
+    margin: 50px auto;
     background-color: red;
-    width: 60%;
+    width: 80%;
     display: grid;
     grid-template-columns: 1fr 1fr;
   }
@@ -80,7 +82,8 @@
   }
 
   .btn {
-    margin-top: 35px;
+    width: 150px;
+    margin: 0px 20px;
   }
   
 </style>
@@ -104,6 +107,9 @@ export default {
     goToPlay() {
       socket.emit("goToPlay", this.$route.params.id)
       this.$router.push(`/playroom/${this.$route.params.id}`)
+    },
+    backToRoom() {
+      this.$router.push('/rooms')
     }
   },
   created() {
