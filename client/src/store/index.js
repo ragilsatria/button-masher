@@ -16,19 +16,19 @@ export default new Vuex.Store({
   mutations: {
     createUser(state, payload) {
       state.users.push(payload);
-      router.push({path: '/rooms'});
+      router.push({ path: '/rooms' });
     },
     ADD_COUNT(state, payload) {
       state.timer = 10000
-      state.count ++
+      state.count++
     },
-    STOP_COUNT(state,payload) {
+    STOP_COUNT(state, payload) {
       state.disabled = true
     },
-      SET_SOCKET(state, payload) {
+    SET_SOCKET(state, payload) {
       state.socket = payload;
     },
-    SET_ROOMS(state, payload){
+    SET_ROOMS(state, payload) {
       state.rooms = payload;
     },
   },

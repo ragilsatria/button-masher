@@ -20,7 +20,7 @@ const routes = [
     name: 'MainMenu',
     component: MainMenu,
   },
- {
+  {
     path: '/rooms',
     name: 'Rooms',
     component: Rooms,
@@ -29,7 +29,7 @@ const routes = [
     path: '/',
     name: 'Home',
     component: Home,
-    meta: {auth : true},
+    meta: { auth: true },
   },
   {
     path: '/about',
@@ -45,7 +45,7 @@ const routes = [
     component: Login,
   },
   {
-    path: '/playroom',
+    path: '/playroom/:id',
     name: 'PlayRoom',
     component: PlayRoom,
   },
@@ -68,7 +68,7 @@ router.beforeEach((to, from, next) => {
   //   next();
   // }
   if (!localStorage.nickname && to.path !== '/login') {
-    next({path: '/login'});
+    next({ path: '/login' });
   } else {
     next();
   }

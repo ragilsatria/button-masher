@@ -4,6 +4,20 @@
   </div>
 </template>
 
+<script>
+import io from 'socket.io-client'
+const baseUrl = `http://localhost:3000`
+
+export default {
+  name: 'App',
+  created(){
+    const socket = io(baseUrl)
+    this.$store.commit(`SET_SOCKET`, socket)
+  }
+  
+}
+</script>
+
 <style>
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;

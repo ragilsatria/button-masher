@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="header">
+   <!-- <div class="header">
       <img alt="mic logo" src="../assets/waiting.png" width="75" />
       <br />
       <br />
@@ -26,17 +26,67 @@
 
           <h1 style="color:black">---</h1>
           <br />
-          <button class="btn btn-warning btn-lg" style="color:white" v-if="curentRoom.admin == nickname" @click="goToPlay">Berpacu Dalam Melodi !</button>
 
+        
 
       </div>
+    </div> -->
+
+    <div class="instruction">
+      Lorem ipsum dolor sit, amet consectetur adipisicing elit. Iste, in! Culpa, nisi corporis, odit, blanditiis aspernatur quos officiis porro placeat recusandae perferendis distinctio dignissimos perspiciatis facere! Accusamus ex nulla molestiae.
+    
     </div>
+    
+    <div>
+      <div class="mother">
+        <div class="card" v-for="(player,index) in curentRoom.list_player" :key="index">
+          <div class="card-body">
+            <h5 class="card-title">Players {{index + 1 }}</h5>
+            <p class="card-text">{{player}}</p>
+          </div>
+        </div>
+      </div>
+      <button class="btn btn-primary btn-lg" style="color:white" v-if="curentRoom.admin == nickname" @click="goToPlay">Mulai</button>
+    </div>
+
   </div>
 </template>
+
+<style scoped>
+  .instruction {
+    padding-top: 20px;
+    margin: 30px auto;
+    height: 100px;
+    width: 60%;
+    background-color: red;
+  }
+
+  .mother {
+    margin: 0 auto;
+    background-color: red;
+    width: 60%;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+  }
+
+  .card {
+    margin: 10px;
+    height: 100px;
+    width: 200px;
+  }
+
+  .btn {
+    margin-top: 35px;
+  }
+  
+</style>
 
 <script>
 // @ is an alias to /src
 // import socket from "@/config/socket";
+import io from 'socket.io-client';
+const baseUrl = 'http://localhost:3000';
+const socket = io(baseUrl)
 
 export default {
   name: "Play",
@@ -47,16 +97,15 @@ export default {
     };
   },
   methods: {
-    playSong() {},
     goToPlay() {
-      this.sockets.emit("goToPlay", this.$route.params.id)
-      this.$router.push(`/play/${this.$route.params.id}`)
+      this.sockets.emit("go-to-play", this.$route.params.id)
+      this.$router.push(`/playroom/${this.$route.params.id}`)
     }
   },
   created() {
     this.nickname = localStorage.nickname
     this.sockets.on("go-to-play",() => {
-      this.$router.push(`/play/${this.$route.params.id}`)
+      this.$router.push(`/playroom/${this.$route.params.id}`)
     })
     const data = {
       roomId: this.$route.params.id,

@@ -13,6 +13,7 @@
 <script>
 import io from 'socket.io-client';
 const baseUrl = 'http://localhost:3000';
+const socket = io(baseUrl);
 
 export default {
   name: "Login",

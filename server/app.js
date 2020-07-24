@@ -4,7 +4,6 @@ const cors = require("cors")
 const http = require('http').createServer(app)
 const io = require('socket.io')(http)
 const PORT = 3000
-const cors = require('cors');
 
 app.use(cors())
 // app.use(express.json())
@@ -32,17 +31,17 @@ io.on('connection', (socket) => {
     socket.on("get-rooms", () => {
         io.emit("get-rooms", rooms)
     })
-    socket.on("create-room",data => {
-         data.id = rooms.length + 1
+    socket.on("create-room", data => {
+        data.id = rooms.length + 1
         rooms.push(data)
         io.emit("get-rooms", rooms)
     })
     socket.on("join-room", data => {
         console.log(data)
-        socket.join(`room${data.roomId}`,() => {
+        socket.join(`room${data.roomId}`, () => {
             console.log(socket.rooms)
             const index = rooms.findIndex(i => i.id == data.roomId)
-            if(!rooms.includes(data.playerName)){
+            if (!rooms.includes(data.playerName)) {
                 rooms[index].list_player.push(data.playerName)
             }
             io.emit("get-rooms", rooms)
