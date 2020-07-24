@@ -81,8 +81,8 @@ export default {
       }
     });
     socket.on("broadcast-count", data => {
+      console.log(data, "<<< data nih woi");
       this.countOtherPlayer = data
-      console.log(data)
     })
     socket.on('timeOutNow', data=>{
       this.$store.state.timeout = true

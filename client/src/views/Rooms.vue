@@ -20,19 +20,9 @@
     </form>
     </div>
 
-    <div class="mother">
-        <div class="card" v-for="room in rooms" :key="room.id" @click="goToRooms(room)">
-          <div class="card-body">
-            <h3 class="card-title">{{room.name}}</h3>
-            <br />
-            <p class="card-text">Players : {{room.list_player.length}}</p>
-            <br />
-          </div>
-        </div>
-    </div>
-
-
-        
+    <div class="mother" v-if="this.rooms.length > 0">
+      <Room v-for="room in rooms" :key="room.id" :room="room"></Room>
+    </div>        
   </div>
 </template>
 
@@ -77,11 +67,15 @@
 </style>
 
 <script>
+import Room from '../components/Room.vue';
 import io from 'socket.io-client';
 const baseUrl = 'http://localhost:3000';
 const socket = io(baseUrl);
 
 export default {
+  components: {
+    Room
+  },
   data() {
     return {
       roomname: "",
@@ -92,6 +86,7 @@ export default {
             return this.$store.state.socket
         },
         rooms(){
+            console.log(this.$store.state.rooms, "<<< room ini")
             return this.$store.state.rooms
         },
         availableRooms(){
@@ -125,17 +120,6 @@ export default {
           this.roomname = ""
           this.genre = ""
       },
-      goToRooms(room){
-        console.log(room)
-        if (room.list_player.length <= 2){
-          this.$router.push(`/waiting/${room.id}`)
-        } else {
-          console.log(`room penuh`)
-        }
-        // socket.emit('join-room', {roomId: id, playerName: localStorage.nickname})
-        
-
-      }
   }
 };
 </script>

@@ -64,13 +64,14 @@
 
   .mother {
     margin: 50px auto;
-    background-color: red;
+    /* background-color: red; */
     width: 80%;
     display: grid;
     grid-template-columns: 1fr 1fr;
   }
 
   .card {
+    box-shadow: 1px 1px 3px black;
     margin: 20px auto;
     height: 400px;
     width: 400px;
