@@ -41,7 +41,17 @@ io.on('connection', (socket) => {
         socket.join(`room${data.roomId}`, () => {
             console.log(socket.rooms)
             const index = rooms.findIndex(i => i.id == data.roomId)
-            if (!rooms.includes(data.playerName)) {
+            // if (!rooms.includes(data.playerName)) {
+            //     rooms[index].list_player.push(data.playerName)
+            // }
+            let flag = false
+            rooms[index].list_player.forEach((item) => {
+                if (item === data.playerName) {
+                    flag = true
+                }
+            })
+
+            if (flag === false) {
                 rooms[index].list_player.push(data.playerName)
             }
             io.emit("get-rooms", rooms)
@@ -57,7 +67,7 @@ io.on('connection', (socket) => {
 
     })
     socket.on('timeOut', () => {
-        console.log(`etst123`)
+        io.emit('timeOutNow')
     })
 })
 

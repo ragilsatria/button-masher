@@ -114,7 +114,7 @@ export default {
       },
       goToRooms(room){
         console.log(room)
-        if (room.list_player.length !== 2){
+        if (room.list_player.length <= 2){
           this.$router.push(`/waiting/${room.id}`)
         } else {
           console.log(`room penuh`)

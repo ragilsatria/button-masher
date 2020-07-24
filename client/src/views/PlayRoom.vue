@@ -1,18 +1,29 @@
 <template>
-  <div class="container mt-5" id="play">
+  <div id="play">
     <h1 v-if='$store.state.timeout && $store.state.count > countOtherPlayer.count'>You Win!!!</h1>
     <h1 v-else-if='$store.state.timeout && $store.state.count < countOtherPlayer.count'>You Lose!!!</h1>
     <h1 v-else-if='$store.state.timeout && $store.state.count === countOtherPlayer.count'>Draw</h1>
 
-    <h2 v-if='$store.state.timeout'>Your Score:</h2>
-    <h1>{{ $store.state.count }}</h1>
-    <div class="container mt-5">
-      <button type="button" name="button" @click="addCount" v-if="!$store.state.disabled">Smash It!</button>
+    <div class="mother">
+      
+      <div class="boks">
+        <h2 v-if='$store.state.timeout'>Your Score:</h2>
+        <h1 class="score">{{ $store.state.count }}</h1>
+      </div>
+
+      <div class="boks">
+        <button class="btn btn-danger" type="button" name="button" @click="addCount" v-if="!$store.state.disabled">Smash It!</button>
+      </div>
+
     </div>
 
-    <div>
-      <p>{{countOtherPlayer.player}}: {{countOtherPlayer.count}}</p>
+    <div class="scoreBoard">
+      <h2>{{countOtherPlayer.player}}: {{countOtherPlayer.count}}</h2>
     </div>
+
+    <!-- <div>
+      <button v-if="$store.state.timeout" @click="backToRoom" class="btn btn-primary">Back to select room</button>
+    </div> -->
   </div>
 </template>
 
@@ -26,7 +37,7 @@ const socket = io(baseUrl);
 export default {
   data(){
     return {
-      countOtherPlayer: {player: 'anonymous', count: 0}
+      countOtherPlayer: {player: 'Opponent', count: 0}
 
     }
   },
@@ -39,18 +50,22 @@ export default {
     },
     startTimer() {
       setTimeout(() => {
-        socket.emit(`timeOut`)
         this.$store.state.timeout = true
+        socket.emit(`timeOut`)
         this.$store.commit('STOP_COUNT')
       }, this.$store.state.timer);
     },
+    backToRoom() {
+      this.$router.push('/rooms')
+    }
+    
   },
   created() {
     const data = {
       roomId: this.$route.params.id,
       playerName: localStorage.nickname
     }
-    socket.emit("join-room", data)
+    // socket.emit("join-room", data)
     window.addEventListener('keydown', (e) => {
       if (e.key == 'Space') {
         this.$store.commit('ADD_COUNT');
@@ -60,14 +75,49 @@ export default {
       this.countOtherPlayer = data
       console.log(data)
     })
+    socket.on('timeOutNow', data=>{
+      this.$store.state.timeout = true
+      this.$store.commit('STOP_COUNT')
+    }) 
   },
   mounted() {
   },
 }
 </script>
 
-<style lang="css" scoped>
-#play {
-  background-color: coral;
-}
+<style scoped>
+
+  #play {
+    background-color: coral;
+    height: 100vh;
+  }
+
+  .mother {
+    padding-top: 40px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .score {
+    padding-top: 60px;
+    font-size: 300px;
+  }
+
+  .scoreBoard {
+    margin: 10px
+  }
+
+  .btn {
+    margin: 150px auto;
+    height: 300px;
+    width: 300px;
+    font-size: 60px;
+  }
+
+  .boks {
+    border: 1px black solid;
+    margin: 0 auto;
+    height: 600px;
+    width: 600px;
+  }
 </style>
