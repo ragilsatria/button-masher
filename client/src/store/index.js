@@ -10,11 +10,13 @@ export default new Vuex.Store({
     count: 0,
     timer: 10000,
     disabled: false,
+    socket: null,
+    rooms: []
   },
   mutations: {
     createUser(state, payload) {
       state.users.push(payload);
-      router.push({path: '/'});
+      router.push({path: '/rooms'});
     },
     ADD_COUNT(state, payload) {
       state.timer = 10000
@@ -22,6 +24,12 @@ export default new Vuex.Store({
     },
     STOP_COUNT(state,payload) {
       state.disabled = true
+    },
+      SET_SOCKET(state, payload) {
+      state.socket = payload;
+    },
+    SET_ROOMS(state, payload){
+      state.rooms = payload;
     },
   },
   actions: {

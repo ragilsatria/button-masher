@@ -3,11 +3,28 @@ import VueRouter from 'vue-router';
 import Home from '../views/Home.vue';
 import Login from '../views/Login.vue';
 import PlayRoom from '../views/PlayRoom.vue';
-
+import Rooms from '../views/Rooms.vue';
+import MainMenu from '../views/MainMenu.vue';
+import Waiting from '../views/Waiting.vue';
 
 Vue.use(VueRouter)
 
 const routes = [
+  {
+    path: '/waiting/:id',
+    name: 'Waiting',
+    component: Waiting,
+  },
+  {
+    path: '/lobby',
+    name: 'MainMenu',
+    component: MainMenu,
+  },
+ {
+    path: '/rooms',
+    name: 'Rooms',
+    component: Rooms,
+  },
   {
     path: '/',
     name: 'Home',
