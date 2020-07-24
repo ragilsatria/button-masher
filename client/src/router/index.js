@@ -6,7 +6,6 @@ import PlayRoom from '../views/PlayRoom.vue';
 import Rooms from '../views/Rooms.vue';
 import MainMenu from '../views/MainMenu.vue';
 import Waiting from '../views/Waiting.vue';
-import Play from '../views/Play.vue'
 
 Vue.use(VueRouter)
 
@@ -33,11 +32,6 @@ const routes = [
     meta: { auth: true },
   },
   {
-    path: '/play/:id',
-    Name: 'Play',
-    component: Play
-  },
-  {
     path: '/about',
     name: 'About',
     // route level code-splitting
@@ -51,7 +45,7 @@ const routes = [
     component: Login,
   },
   {
-    path: '/playroom',
+    path: '/playroom/:id',
     name: 'PlayRoom',
     component: PlayRoom,
   },

@@ -4,7 +4,6 @@ const cors = require("cors")
 const http = require('http').createServer(app)
 const io = require('socket.io')(http)
 const PORT = 3000
-const cors = require('cors');
 
 app.use(cors())
 // app.use(express.json())

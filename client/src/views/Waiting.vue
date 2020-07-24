@@ -98,14 +98,14 @@ export default {
   },
   methods: {
     goToPlay() {
-      this.sockets.emit("goToPlay", this.$route.params.id)
-      this.$router.push(`/play/${this.$route.params.id}`)
+      this.sockets.emit("go-to-play", this.$route.params.id)
+      this.$router.push(`/playroom/${this.$route.params.id}`)
     }
   },
   created() {
     this.nickname = localStorage.nickname
     this.sockets.on("go-to-play",() => {
-      this.$router.push(`/play/${this.$route.params.id}`)
+      this.$router.push(`/playroom/${this.$route.params.id}`)
     })
     const data = {
       roomId: this.$route.params.id,
