@@ -33,16 +33,15 @@
     </div> -->
 
     <div class="instruction">
-      Lorem ipsum dolor sit, amet consectetur adipisicing elit. Iste, in! Culpa, nisi corporis, odit, blanditiis aspernatur quos officiis porro placeat recusandae perferendis distinctio dignissimos perspiciatis facere! Accusamus ex nulla molestiae.
-    
+      <h1>Hint: Click Click Click..</h1>
     </div>
     
     <div>
       <div class="mother">
         <div class="card" v-for="(player,index) in curentRoom.list_player" :key="index">
           <div class="card-body">
-            <h5 class="card-title">Players {{index + 1 }}</h5>
-            <p class="card-text">{{player}}</p>
+            <!-- <h5 class="card-title">Players {{index + 1 }}</h5> -->
+            <p class="card-text">Players {{index + 1 }} <br> {{player}}</p>
           </div>
         </div>
       </div>
@@ -66,13 +65,18 @@
     background-color: red;
     width: 60%;
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
   }
 
   .card {
-    margin: 10px;
-    height: 100px;
-    width: 200px;
+    margin: 20px auto;
+    height: 400px;
+    width: 400px;
+  }
+
+  .card-text {
+    font-size: 30px;
+    padding-top: 126px;
   }
 
   .btn {
