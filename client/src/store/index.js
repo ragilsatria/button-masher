@@ -7,6 +7,9 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     users: [],
+    count: 0,
+    timer: 10000,
+    disabled: false,
     socket: null,
     rooms: []
   },
@@ -15,12 +18,19 @@ export default new Vuex.Store({
       state.users.push(payload);
       router.push({path: '/rooms'});
     },
-    SET_SOCKET(state, payload) {
+    ADD_COUNT(state, payload) {
+      state.timer = 10000
+      state.count ++
+    },
+    STOP_COUNT(state,payload) {
+      state.disabled = true
+    },
+      SET_SOCKET(state, payload) {
       state.socket = payload;
     },
     SET_ROOMS(state, payload){
       state.rooms = payload;
-    }
+    },
   },
   actions: {
   },
