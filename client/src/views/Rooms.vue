@@ -46,8 +46,13 @@
   }
 
   .card {
+    cursor: pointer;
     width: 200px;
     margin: 15px;
+  }
+
+  .card:hover {
+    background-color: #e0e0bd;
   }
 
   #createRoom {
