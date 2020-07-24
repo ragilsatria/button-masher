@@ -8,7 +8,7 @@ export default new Vuex.Store({
   state: {
     users: [],
     count: 0,
-    timer: 10000,
+    timer: 5000,
     disabled: false,
     socket: null,
     rooms: []
